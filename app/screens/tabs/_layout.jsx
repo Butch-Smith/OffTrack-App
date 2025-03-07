@@ -5,7 +5,7 @@ import React from 'react'
 
 export default function tabsLayout() {
   return (
-    <Tabs screenOptions={{ headerShown: false }}>
+    <Tabs screenOptions={{tabBarShowLabel: false, headerShown: false }}>
       <Tabs.Screen name="home" options={{ tabBarIcon: ({ size }) => (<Ionicons name="home-outline" size={size} />) }} />
       <Tabs.Screen name="search" options={{ tabBarIcon: ({ size }) => (<Ionicons name="search-outline" size={size} />) }} />
       <Tabs.Screen name="addTrip" options={{ tabBarIcon: ({ size }) => (<Ionicons name="add-outline" size={size} />) }} />

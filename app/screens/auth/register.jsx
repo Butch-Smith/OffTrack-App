@@ -102,6 +102,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     smallButton: {
+        position: 'absolute',
         width: "100%",
         textAlign: 'center',
         color: 'white',
