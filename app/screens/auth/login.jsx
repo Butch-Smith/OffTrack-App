@@ -17,7 +17,7 @@ export default function login() {
                     <TextInput placeholder='Password' style={styles.textInput}></TextInput>
                 </Pressable>
                 <Pressable>
-                    <Text style={styles.loginButton}>LOGIN</Text>
+                    <Text style={styles.loginButton} onPress={() => router.push("/screens/tabs/home")}>LOGIN</Text>
                 </Pressable>
                 <Pressable>
                     <Text style={styles.smallButton} onPress={() => router.push("/screens/auth/register")}>Don't have an account? Sign up</Text>

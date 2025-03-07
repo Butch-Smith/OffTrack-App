@@ -1,4 +1,4 @@
-import { View, Text, Pressable, StyleSheet, Button, Image, ImageBackground } from 'react-native'
+import { View, Text, Pressable, StyleSheet, Image, ImageBackground } from 'react-native'
 import { useRouter } from 'expo-router'
 
 export default function App() {

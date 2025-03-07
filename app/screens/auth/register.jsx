@@ -20,7 +20,7 @@ export default function register() {
                     <TextInput placeholder='Confirm password' style={styles.textInput}></TextInput>
                 </Pressable>
                 <Pressable>
-                    <Text style={styles.regiButton}>CREATE ACCOUNT</Text>
+                    <Text style={styles.regiButton} onPress={() => router.push("/screens/tabs/home")}>CREATE ACCOUNT</Text>
                 </Pressable>
                 <Pressable>
                     <Text style={styles.smallButton} onPress={() => router.push("/screens/auth/login")}>Don't have an account? Sign up</Text>
