@@ -1,12 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, StatusBar, Text, View } from 'react-native'
 import React from 'react'
 
 export default function searchScreen() {
-  return (
-    <View>
-      <Text>search</Text>
-    </View>
-  )
+    return (<>
+        <StatusBar backgroundColor="#212121" barStyle="light-content" />
+        <View>
+            <Text>search</Text>
+        </View>
+    </>
+    )
 }
 
 const styles = StyleSheet.create({})

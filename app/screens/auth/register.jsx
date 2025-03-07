@@ -1,34 +1,69 @@
-import { View, Text, TextInput, Pressable, StyleSheet, Button, Image, ImageBackground } from 'react-native'
-import { useRouter } from 'expo-router'
+import { View, Text, StatusBar, TextInput, Pressable, StyleSheet, Image, ImageBackground } from 'react-native';
+import { useRouter } from 'expo-router';
+import { useState } from 'react';
 
-export default function register() {
-    const router = useRouter()
+export default function Register() {
+    const router = useRouter();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
 
-    return (<>
-        <ImageBackground source={require("../../../assets/images/regiscr.png")} resizeMode='cover' style={styles.bgImage}>
-            <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require("../../../assets/images/OffTracklogo.png")} />
-            </View>
-            <View style={styles.formContainer}>
-                <Pressable>
-                    <TextInput placeholder='Email adress' style={styles.textInput}></TextInput>
-                </Pressable>
-                <Pressable>
-                    <TextInput placeholder='Password' style={styles.textInput}></TextInput>
-                </Pressable>
-                <Pressable>
-                    <TextInput placeholder='Confirm password' style={styles.textInput}></TextInput>
-                </Pressable>
-                <Pressable>
-                    <Text style={styles.regiButton} onPress={() => router.push("/screens/tabs/home")}>CREATE ACCOUNT</Text>
-                </Pressable>
-                <Pressable>
-                    <Text style={styles.smallButton} onPress={() => router.push("/screens/auth/login")}>Don't have an account? Sign up</Text>
-                </Pressable>
-            </View>
-        </ImageBackground>
-    </>
-    )
+    const handleSubmit = () => {
+        if (!email || !password || !confirmPassword) {
+            setError('All fields are required');
+            return;
+        }
+        if (password !== confirmPassword) {
+            setError('Passwords do not match');
+            return;
+        }
+        setError('');
+        // Handle registration logic here
+        router.push("/screens/tabs/home");
+    };
+
+    return (
+        <>
+            <StatusBar backgroundColor="#212121" barStyle="light-content" />
+            <ImageBackground source={require("../../../assets/images/regiscr.png")} resizeMode='cover' style={styles.bgImage}>
+                <View style={styles.logoContainer}>
+                    <Image style={styles.logo} source={require("../../../assets/images/OffTracklogo.png")} />
+                </View>
+                <View style={styles.formContainer}>
+                    {error ? <Text style={styles.errorText}>{error}</Text> : null}
+                    <TextInput 
+                        placeholder='Email address' 
+                        style={styles.textInput} 
+                        value={email} 
+                        onChangeText={setEmail}
+                        keyboardType='email-address'
+                        autoCapitalize='none'
+                    />
+                    <TextInput 
+                        placeholder='Password' 
+                        style={styles.textInput} 
+                        value={password} 
+                        onChangeText={setPassword}
+                        secureTextEntry
+                    />
+                    <TextInput 
+                        placeholder='Confirm password' 
+                        style={styles.textInput} 
+                        value={confirmPassword} 
+                        onChangeText={setConfirmPassword}
+                        secureTextEntry
+                    />
+                    <Pressable onPress={handleSubmit}>
+                        <Text style={styles.regiButton}>CREATE ACCOUNT</Text>
+                    </Pressable>
+                    <Pressable onPress={() => router.push("/screens/auth/login")}>
+                        <Text style={styles.smallButton}>Already have an account? Log in</Text>
+                    </Pressable>
+                </View>
+            </ImageBackground>
+        </>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -42,21 +77,20 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 22,
-        paddingVertical: 40
-    },
-    welcomeText: {
-        width: '70%',
-        fontSize: 45,
-        fontWeight: 'bold',
-        color: 'white',
-        marginBottom: 100,
-        marginRight: "auto"
+        paddingVertical: 40,
     },
     formContainer: {
         width: '100%',
         gap: 16,
         height: "fit-content",
         marginBottom: 34,
+    },
+    errorText: {
+        color: 'red',
+        textAlign: 'center',
+        marginBottom: 10,
+        fontSize: 14,
+        fontWeight: 'bold',
     },
     regiButton: {
         textAlign: 'center',
@@ -69,9 +103,8 @@ const styles = StyleSheet.create({
     },
     smallButton: {
         width: "100%",
-        position: 'absolute',
         textAlign: 'center',
-        color: 'black',
+        color: 'white',
         padding: 10,
         borderRadius: 50,
         fontSize: 14,
@@ -86,15 +119,15 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         fontSize: 16,
         fontWeight: 'bold',
-        opacity: 0.9
+        opacity: 0.9,
     },
     logo: {
         width: 200,
-        resizeMode: 'contain'
+        resizeMode: 'contain',
     },
     logoContainer: {
         width: "100%",
         flex: 1,
-        justifyContent: 'start'
-    }
-})
+        justifyContent: 'start',
+    },
+});

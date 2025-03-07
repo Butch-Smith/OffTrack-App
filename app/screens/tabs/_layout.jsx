@@ -6,11 +6,11 @@ import React from 'react'
 export default function tabsLayout() {
   return (
     <Tabs screenOptions={{ headerShown: false }}>
-      <Tabs.Screen name="home" options={{ tabBarIcon: ({ size }) => (<Ionicons name="home-outline" size={size} />)}}/>
-      <Tabs.Screen name="search" options={{ tabBarIcon: ({ size }) => (<Ionicons name="search-outline" size={size} />)}}/>
-      <Tabs.Screen name="addTrip" options={{ tabBarIcon: ({ size }) => (<Ionicons name="add-outline" size={size} />)}}/>
-      <Tabs.Screen name="notifs" options={{ tabBarIcon: ({ size }) => (<Ionicons name="notifications-outline" size={size} />)}}/>
-      <Tabs.Screen name="profile" options={{ tabBarIcon: ({ size }) => (<Ionicons name="person-outline" size={size} />)}}/>
+      <Tabs.Screen name="home" options={{ tabBarIcon: ({ size }) => (<Ionicons name="home-outline" size={size} />) }} />
+      <Tabs.Screen name="search" options={{ tabBarIcon: ({ size }) => (<Ionicons name="search-outline" size={size} />) }} />
+      <Tabs.Screen name="addTrip" options={{ tabBarIcon: ({ size }) => (<Ionicons name="add-outline" size={size} />) }} />
+      <Tabs.Screen name="notifs" options={{ tabBarIcon: ({ size }) => (<Ionicons name="notifications-outline" size={size} />) }} />
+      <Tabs.Screen name="profile" options={{ tabBarIcon: ({ size }) => (<Ionicons name="person-outline" size={size} />) }} />
     </Tabs>
   )
 }

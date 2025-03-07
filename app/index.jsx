@@ -1,10 +1,11 @@
-import { View, Text, Pressable, StyleSheet, Image, ImageBackground } from 'react-native'
+import { View, Text, StatusBar, Pressable, StyleSheet, Image, ImageBackground } from 'react-native'
 import { useRouter } from 'expo-router'
 
 export default function App() {
     const router = useRouter()
 
     return (<>
+        <StatusBar backgroundColor="#212121" barStyle="light-content" />
         <ImageBackground source={require("../assets/images/welcomescr.png")} resizeMode='cover' style={styles.bgImage}>
             <View style={styles.logoContainer}>
                 <Image style={styles.logo} source={require("../assets/images/OffTracklogo.png")} />
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: 22,
-        paddingVertical: 40 
+        paddingVertical: 40
     },
     welcomeText: {
         width: '70%',
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         width: '100%',
         gap: 16,
         height: "fit-content",
-        marginBottom : 34,
+        marginBottom: 34,
     },
     homeButton: {
         textAlign: 'center',
