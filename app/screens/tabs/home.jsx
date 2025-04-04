@@ -32,7 +32,7 @@ export default function HomeScreen() {
   return (
     <>
       <StatusBar backgroundColor="#212121" barStyle="light-content" />
-      <Text style={styles.header}>🏖️ My Trips {storedPassword}</Text>
+      <Text style={styles.header}>🏖️ My Trips</Text>
       <View style={styles.container}>
         <FlatList
           data={DATA}
