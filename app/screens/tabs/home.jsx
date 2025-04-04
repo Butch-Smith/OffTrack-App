@@ -1,8 +1,26 @@
 import { StyleSheet, FlatList, StatusBar, Text, View, ImageBackground, Pressable } from 'react-native';
 import React from 'react';
 import { Link } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useState, useEffect } from 'react';
 
 export default function HomeScreen() {
+  const [storedPassword, setStoredPassword] = useState('')
+
+  useEffect(() => {
+    getData()
+  }, [])
+
+  const getData = async () => {
+    try {
+      const password = await AsyncStorage.getItem('password');
+      if (password !== null) {
+        setStoredPassword(password);  
+      }
+    } catch (err) {
+      console.error('Error retrieving data', err);
+    }
+  };
   const DATA = [
     { key: '1', title: 'Barcelona', duration: 'maart 2024 - april 2024', image: require('../../../assets/images/Barcelona.png') },
     { key: '2', title: 'New York', duration: 'januari 2024 - februari 2024', image: require('../../../assets/images/New-York.png') },
@@ -14,7 +32,7 @@ export default function HomeScreen() {
   return (
     <>
       <StatusBar backgroundColor="#212121" barStyle="light-content" />
-      <Text style={styles.header}>🏖️ My Trips</Text>
+      <Text style={styles.header}>🏖️ My Trips {storedPassword}</Text>
       <View style={styles.container}>
         <FlatList
           data={DATA}

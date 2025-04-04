@@ -1,5 +1,6 @@
 import { View, Text, StatusBar, TextInput, Pressable, StyleSheet, Image, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 
 export default function Register() {
@@ -9,7 +10,16 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
 
-    const handleSubmit = () => {
+    const saveData = async () => {
+        try {
+            await AsyncStorage.setItem('email', email);
+            await AsyncStorage.setItem('password', password);
+        } catch (e) {
+            setError('Error saving data', e);
+        }
+    }
+
+    const handleSubmit = async () => {
         if (!email || !password || !confirmPassword) {
             setError('All fields are required');
             return;
@@ -19,8 +29,8 @@ export default function Register() {
             return;
         }
         setError('');
-        // Handle registration logic here
-        router.push("/screens/tabs/home");
+        await saveData();
+        router.push("/screens/auth/login");
     };
 
     return (
@@ -32,25 +42,25 @@ export default function Register() {
                 </View>
                 <View style={styles.formContainer}>
                     {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                    <TextInput 
-                        placeholder='Email address' 
-                        style={styles.textInput} 
-                        value={email} 
+                    <TextInput
+                        placeholder='Email address'
+                        style={styles.textInput}
+                        value={email}
                         onChangeText={setEmail}
                         keyboardType='email-address'
                         autoCapitalize='none'
                     />
-                    <TextInput 
-                        placeholder='Password' 
-                        style={styles.textInput} 
-                        value={password} 
+                    <TextInput
+                        placeholder='Password'
+                        style={styles.textInput}
+                        value={password}
                         onChangeText={setPassword}
                         secureTextEntry
                     />
-                    <TextInput 
-                        placeholder='Confirm password' 
-                        style={styles.textInput} 
-                        value={confirmPassword} 
+                    <TextInput
+                        placeholder='Confirm password'
+                        style={styles.textInput}
+                        value={confirmPassword}
                         onChangeText={setConfirmPassword}
                         secureTextEntry
                     />

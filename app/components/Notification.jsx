@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
         justifyContent: 'start',
         backgroundColor: '#F5F5F5',
         backgroundColor: 'white',
+        zIndex:	80,
         gap: 10,
         borderRadius: 10,
         shadowColor: "#000",

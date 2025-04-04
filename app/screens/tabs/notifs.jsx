@@ -34,7 +34,6 @@ export default function notifsScreen() {
             username: 'Saba',
             content: 'saba desc',
         },
-
     ]
     return (<>
         <Text style={styles.header}>🔔 Notifications</Text>

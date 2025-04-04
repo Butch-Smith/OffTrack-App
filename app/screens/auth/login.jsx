@@ -1,21 +1,46 @@
 import { View, Text, StatusBar, TextInput, Pressable, StyleSheet, Button, Image, ImageBackground } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Login() {
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [storedPassword, setStoredPassword] = useState('')
+    const [storedEmail, setStoredEmail] = useState('');
+
+    useEffect(() => {
+        getData();
+    }, []);
+
+    const getData = async () => {
+        try {
+            const asyncEmail = await AsyncStorage.getItem('email');
+            const asyncPassword = await AsyncStorage.getItem('password');
+            setStoredEmail(asyncEmail);
+            setStoredPassword(asyncPassword);
+
+        } catch (e) {
+            setError('bitch' + e);
+        }
+    };
+
+
 
     const handleSubmit = () => {
         if (!email || !password) {
             setError('All fields are required');
             return;
         }
-        setError('');
-        // Handle login logic here
-        router.push("/screens/tabs/home");
+        if (email == storedEmail && password == storedPassword) {
+            setError('');
+            router.push('/screens/tabs/home')
+        }
+        else {
+            setError('Email or password are incorrect');
+        }
     };
 
     return (
@@ -27,20 +52,20 @@ export default function Login() {
                 </View>
                 <View style={styles.formContainer}>
                     {error ? <Text style={styles.errorText}>{error}</Text> : null}
-                    <TextInput 
-                        placeholder='Email address' 
-                        style={styles.textInput} 
-                        value={email} 
+                    <TextInput
+                        placeholder={'Email'}
+                        style={styles.textInput}
+                        value={email}
                         onChangeText={setEmail}
                         keyboardType='email-address'
                         autoCapitalize='none'
                     />
-                    <TextInput 
-                        placeholder='Password' 
-                        style={styles.textInput} 
-                        value={password} 
+                    <TextInput
+                        placeholder={'Password'}
+                        style={styles.textInput}
+                        value={password}
                         onChangeText={setPassword}
-                        secureTextEntry
+                        secureTextEntry={true}
                     />
                     <Pressable onPress={handleSubmit}>
                         <Text style={styles.loginButton}>LOGIN</Text>
